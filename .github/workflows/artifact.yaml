@@ -1,0 +1,24 @@
+name: artifact
+
+on: push
+
+env:
+  artifact_name: sup
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+      - name: creating and uploading files
+        run : |
+          mkdir download
+          cd download
+          echo '1..' > 1.html
+          cd ..
+      - name: Upload the artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.artifact_name }}
+          path: download
